@@ -40,13 +40,39 @@ object AuthHelper {
     }
 
     /**
+     * Fetches the current user's Firebase ID token asynchronously.
+     * @param forceRefresh If true, forces a refresh of the token.
+     * @param callback Returns the token string, or null if failed/no user.
+     */
+    fun getIdToken(
+        forceRefresh: Boolean = false,
+        callback: (idToken: String?) -> Unit
+    ) {
+        val user = auth.currentUser
+        if (user == null) {
+            callback(null)
+            return
+        }
+
+        user.getIdToken(forceRefresh)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    callback(task.result?.token)
+                } else {
+                    callback(null)
+                }
+            }
+    }
+
+
+    /**
      * Handles post-login tasks for any FirebaseUser.
      * Checks if first-time login, posts FCM token, and optionally navigates.
      */
     fun handlePostLogin(
         context: Context,
         user: FirebaseUser,
-        onNavigate: () -> Unit = {}
+        callback: (token: String?) -> Unit = {}
     ) {
         val isNewUser = user.metadata?.creationTimestamp == user.metadata?.lastSignInTimestamp
 
@@ -61,6 +87,9 @@ object AuthHelper {
             // TODO: Send token to server
         }
 
-        onNavigate()
+        this.getIdToken { token ->
+            callback(token)
+        }
+
     }
 }

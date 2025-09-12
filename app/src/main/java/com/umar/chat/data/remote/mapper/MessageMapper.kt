@@ -4,14 +4,14 @@ import com.umar.chat.data.remote.api.MessageApiModel
 import com.umar.chat.domain.model.Message
 import java.time.Instant
 
-fun MessageApiModel.toDomain(currentUserId: String) = Message(
+fun MessageApiModel.toDomain(userId: Long) = Message(
     id = id,
     threadId = threadId,
     sender = sender.toDomain(),
     content = content,
     timestamp = Instant.parse(timestamp),
     readAt = readAt?.let { Instant.parse(it) },
-    isMine = sender.id == currentUserId
+    isMine = sender.id == userId
 )
 
 fun List<Message>.withNextPrevFlags(currentUserId: String): List<Message> {

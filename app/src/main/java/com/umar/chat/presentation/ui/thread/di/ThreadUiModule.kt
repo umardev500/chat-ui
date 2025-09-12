@@ -11,7 +11,7 @@ import dagger.multibindings.IntoMap
 
 @Module
 @InstallIn(ActivityComponent::class)
-interface ThreadModule {
+interface ThreadUiModule {
     @Binds
     @IntoMap
     @ScreenModelKey(ThreadViewModel::class)

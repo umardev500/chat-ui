@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ThreadApiModel(
-    @SerialName("id") val id: String,
+    @SerialName("id") val id: Long,
     @SerialName("title") val title: String,
     @SerialName("image") val image: String? = null,
     @SerialName("last_message") val lastMessage: MessageApiModel? = null,

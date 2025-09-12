@@ -7,21 +7,21 @@ import java.time.Instant
 import kotlin.random.Random
 
 fun generateMockChats(
-    currentUserId: String,
+    userId: Long,
     messageCount: Int = 25
 ): List<Message> {
     return (1..messageCount).map { mIndex ->
         val isMine = Random.nextBoolean()
         val sender = if (isMine) {
             User(
-                id = currentUserId,
+                id = userId,
                 email = faker.internet().emailAddress(),
                 name = faker.name().fullName(),
                 avatarUrl = "https://api.dicebear.com/9.x/big-smile/png?seed=Alex"
             )
         } else {
             User(
-                id = "2",
+                id = 2L,
                 email = faker.internet().emailAddress(),
                 name = faker.name().fullName(),
                 avatarUrl = "https://api.dicebear.com/9.x/big-smile/png?seed=SteveJob"
@@ -29,8 +29,8 @@ fun generateMockChats(
         }
 
         Message(
-            id = "m$mIndex",
-            threadId = "t$mIndex",
+            id = mIndex.toLong(),
+            threadId = mIndex.toLong(),
             sender = sender,
             content = faker.lorem().sentence(),
             timestamp = Instant.now().minusSeconds(Random.nextLong(60, 3600)),
@@ -40,4 +40,4 @@ fun generateMockChats(
     }
 }
 
-val mockMessages = generateMockChats(currentUserId = "1")
+val mockMessages = generateMockChats(userId = 1L)

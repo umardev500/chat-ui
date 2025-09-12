@@ -62,6 +62,7 @@ hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.re
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 
 # Other
 compose-placeholder-material3 = { module = "com.eygraber:compose-placeholder-material3", version.ref = "placeholder" }

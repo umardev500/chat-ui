@@ -53,7 +53,7 @@ class ThreadScreen @Inject constructor() : Screen {
                 try {
                     val result = it.getIdToken(true).await()
                     val idToken = result.token
-                    Log.d("auth", "idToken: $idToken : ${user.displayName}")
+                    Log.d("auth", "idToken: $idToken")
                 } catch (e: Exception) {
                     Log.e("auth", "getIdToken failed: ${e.message}")
                 }

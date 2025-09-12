@@ -8,7 +8,7 @@ fun generateMockUsers(userCount: Int = 25): List<User> {
 
     return (1..userCount).map { uIndex ->
         User(
-            id = "u$uIndex",
+            id = uIndex.toLong(),
             email = faker.internet().emailAddress(),
             name = faker.name().fullName(),
             avatarUrl = "https://api.dicebear.com/9.x/big-smile/png?seed=${
